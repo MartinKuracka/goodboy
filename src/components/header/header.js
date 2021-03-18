@@ -1,14 +1,22 @@
 import React from 'react';
+import styled from 'styled-components';
 
-class Headers extends React.Component{
+const Text = styled.h1 `
+    margin-top: 50px;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1;
+`
+
+class Header extends React.Component{
     render() {
         return(
             <div>
-                Header text
+                <Text>Vyberte si možnosť, ako chcete pomôcť</Text>
             </div>
             
         )
     }
 }
 
-export default Headers;
+export default Header;
