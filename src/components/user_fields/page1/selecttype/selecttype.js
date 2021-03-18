@@ -22,11 +22,16 @@ const Select = styled.div `
 
 const selector = {
     'width': '100%',
-    'border-radius' : '5px',
-    'padding' : '10px'
+    'border' : '0px'
 }
 
+
+
 class SelectType extends React.Component {
+    selected = (e) => {
+        console.log('props here',e.target.value)
+    }
+
     render() {
         return(
             <Wrapper>
@@ -36,9 +41,10 @@ class SelectType extends React.Component {
                 </TopText>
                 <Select>
                     <h3>Útulok</h3>
-                    <select style={selector} name="útulky">
-                        <option  value="Vyberte útulok zo zoznamu">Vyberte útulok zo zoznamu</option>
-                        <option value="útulok">útulok</option>
+                    <select style={selector} name="útulky" onChange={this.selected}>
+                        <option >Vyberte útulok zo zoznamu</option>
+                        <option value="1">útulok</option>
+                        <option value="2">útulok2</option>
                     </select>
                 </Select>
             </Wrapper>

@@ -40,14 +40,18 @@ const Text = styled.p `
 
 
 class Contribution extends React.Component {
+    contributionType = (e) => {
+        console.log('contribution type', e)
+    }
+
     render() {
         return(
             <Container>
-                <Option1>
+                <Option1 onClick={this.contributionType} value='1'>
                     <Image src={Icon1}/>
                     <Text >Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
-                <Option2 active>
+                <Option2 onClick={this.contributionType} value='2'>
                     <Image src={Icon2}/>
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
