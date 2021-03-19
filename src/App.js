@@ -1,4 +1,10 @@
 import logo from './logo.svg';
+import { Provider } from "react-redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import {contributionType} from './components/user_fields/page1/contribution/cont_reducer';
+import {selectShelter} from './components/user_fields/page1/selecttype/selecttype_reducers';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import './App.css';
 import Navbar from './components/navbar/navbar';
 import Header from './components/header/header';
@@ -9,6 +15,10 @@ import PageIndicator from './img/Page indicator.png';
 import UserField from './components/user_fields/userfileds';
 // import Footer from './components/image/image';
 // import styled from 'styled-components';
+
+const logger = createLogger();
+const rootReducer = combineReducers({contributionType, selectShelter});
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 const TextSection = styled.div `
   width: 60%;
@@ -30,20 +40,22 @@ const Layout = styled.div `
 
 function App() {
   return (
+    <Provider store={store}>
       <div className="App">
           <Navbar />
           <Layout>
             <TextSection>
-              <img src={PageIndicator}></img>
+              <img src={PageIndicator} alt='icon'></img>
               <Header />
               <UserField />
             </TextSection>
             <ImgSection>
-              <img src={Image}></img>
+              <img src={Image} alt='icon'></img>
             </ImgSection>
           </Layout>
           {/* <Footer /> */}
       </div>
+    </Provider>
   );
 }
 

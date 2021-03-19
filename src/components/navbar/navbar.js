@@ -20,8 +20,8 @@ const Navbar = () => {
         <Container>
             <p>Nadácia Good Boy</p>
             <div>
-                <img src={fb}></img>
-                <img src={instagram}></img>
+                <img src={fb} alt='icon'></img>
+                <img src={instagram} alt='icon'></img>
             </div>
         </Container>
     )

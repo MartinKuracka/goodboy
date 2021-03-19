@@ -1,5 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import {requestLinks} from './selecttype_actions';
+import SheltersList from './shelterslist';
+
+const mapStateToProps = (state) => {
+    return {
+        isPending: state.selectShelter.isPending,
+        shelters: state.selectShelter.shelters,
+        error: state.selectShelter.error,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selected: (e) => console.log('selected',e.target.value),
+        selectLink: () => dispatch(requestLinks())
+    }
+}
 
 const Wrapper = styled.div `
     position:relative;
@@ -25,11 +43,15 @@ const selector = {
     'border' : '0px'
 }
 
-
+var sheltersList = [];
 
 class SelectType extends React.Component {
-    selected = (e) => {
-        console.log('props here',e.target.value)
+
+    componentDidMount() {
+        this.props.selectLink();
+        setTimeout(() => {
+            sheltersList = this.props.shelters;
+        },1000);
     }
 
     render() {
@@ -41,10 +63,9 @@ class SelectType extends React.Component {
                 </TopText>
                 <Select>
                     <h3>Útulok</h3>
-                    <select style={selector} name="útulky" onChange={this.selected}>
+                    <select style={selector} name="útulky" onChange={this.props.selected}>
                         <option >Vyberte útulok zo zoznamu</option>
-                        <option value="1">útulok</option>
-                        <option value="2">útulok2</option>
+                        <SheltersList sheltersList={this.props.shelters} />
                     </select>
                 </Select>
             </Wrapper>
@@ -52,4 +73,4 @@ class SelectType extends React.Component {
     }
 }
 
-export default SelectType;
+export default connect(mapStateToProps, mapDispatchToProps)(SelectType);

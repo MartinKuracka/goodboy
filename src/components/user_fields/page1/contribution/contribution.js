@@ -1,8 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Icon1 from '../../../../img/icon1.png';
 import Icon2 from '../../../../img/icon2.png';
+import {selectType} from './cont_actions';
 
+const mapStateToProps = (state) => {
+    return {
+        contributiontype: state.contributiontype
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        contributionValue: (e) => dispatch(selectType(e.target.value))
+    }
+}
 
 const Container = styled.div `
     width: 100%;
@@ -40,18 +53,18 @@ const Text = styled.p `
 
 
 class Contribution extends React.Component {
-    contributionType = (e) => {
-        console.log('contribution type', e)
-    }
+    // contributionType = (e) => {
+    //     console.log('contribution type', e)
+    // }
 
     render() {
         return(
             <Container>
-                <Option1 onClick={this.contributionType} value='1'>
+                <Option1 onClick={()=>this.setState({value:"single"}), this.props.contributionValue}>
                     <Image src={Icon1}/>
-                    <Text >Chcem finančne prispieť konkrétnemu útulku</Text>
+                    <Text>Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
-                <Option2 onClick={this.contributionType} value='2'>
+                <Option2 onClick={()=>this.setState({value:"whole"})}>
                     <Image src={Icon2}/>
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
@@ -60,4 +73,4 @@ class Contribution extends React.Component {
     }
 }
 
-export default Contribution;
+export default connect(mapStateToProps, mapDispatchToProps)(Contribution);
