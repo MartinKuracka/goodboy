@@ -4,8 +4,8 @@ import {requestLinks} from './selecttype_actions';
 
 const mapStateToProps = (state) => {
     return {
-        isPending: state.selectShelter.isPending,
-        shelters: state.selectShelter.shelters,
+        isPending: state.isPending,
+        shelters: state.shelters,
     }
 }
 
@@ -15,6 +15,7 @@ class SheltersList extends React.Component {
     render() {
         const { isPending, shelters} = this.props;
         if (isPending === false) {
+            console.log('loaded')
             return (
                 <div>
                     { shelters.map(function(shelter) {
@@ -28,8 +29,6 @@ class SheltersList extends React.Component {
             <option> Nahravam Data... </option>
         )}
     }
-    // console.log('before if statement array',this.props.shelters);
-
 }
 
 export default connect(mapStateToProps, null)(SheltersList);

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        contributionValue: (e) => dispatch(selectType(e.target.value))
+        contributionValue: (e) => dispatch(selectType(e))
     }
 }
 
@@ -57,14 +57,22 @@ class Contribution extends React.Component {
     //     console.log('contribution type', e)
     // }
 
+    option1 = () => {
+        this.props.contributionValue('single');
+    }
+
+    option2 = () => {
+        this.props.contributionValue('whole');
+    }
+
     render() {
         return(
             <Container>
-                <Option1 onClick={()=>this.setState({value:"single"}), this.props.contributionValue}>
+                <Option1 onClick={this.option1}>
                     <Image src={Icon1}/>
                     <Text>Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
-                <Option2 onClick={()=>this.setState({value:"whole"})}>
+                <Option2 onClick={this.option2}>
                     <Image src={Icon2}/>
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
