@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {requestLinks} from './selecttype_actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +10,6 @@ const mapStateToProps = (state) => {
 
 class SheltersList extends React.Component {
 
-    
     render() {
         const { isPending, shelters} = this.props;
         if (isPending === false) {
@@ -23,10 +21,10 @@ class SheltersList extends React.Component {
                     })}
                 </div>
             )
-        } else { 
+        } else {
             console.log('fetching')
             return (
-            <option> Nahravam Data... </option>
+            <option id='2'> Nahravam Data... </option>
         )}
     }
 }
