@@ -6,10 +6,7 @@ import {
 
 const initialState = {
     isPending: false,
-    shelters: [{
-        id: '0',
-        name: 'Nahravam utulky'
-    }],
+    shelters: [],
     error: '',
 };
 

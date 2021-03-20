@@ -6,15 +6,15 @@ import SheltersList from './shelterslist';
 
 const mapStateToProps = (state) => {
     return {
-        isPending: state.selectShelter.isPending,
-        shelters: state.selectShelter.shelters,
-        error: state.selectShelter.error,
+        isPending: state.isPending,
+        shelters: state.shelters,
+        error: state.error,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        selected: (e) => console.log('selected',e.target.value),
+        selected: (e) => console.log('selected',e.target.id),
         selectLink: () => dispatch(requestLinks())
     }
 }
@@ -64,8 +64,8 @@ class SelectType extends React.Component {
                 <Select>
                     <h3>Útulok</h3>
                     <select style={selector} name="útulky" onChange={this.props.selected}>
-                        <option >Vyberte útulok zo zoznamu</option>
-                        <SheltersList sheltersList={this.props.shelters} />
+                        <option id='1'>Vyberte útulok zo zoznamu</option>
+                        <SheltersList />
                     </select>
                 </Select>
             </Wrapper>
