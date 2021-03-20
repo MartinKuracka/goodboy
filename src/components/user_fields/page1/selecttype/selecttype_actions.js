@@ -1,7 +1,8 @@
 import {
     REQUEST_LINKS_PENDING,
     REQUEST_LINKS_SUCCESS,
-    REQUEST_LINKS_FAILED
+    REQUEST_LINKS_FAILED,
+    SELECTED_SHELTER
 } from './selecttype_constants';
 
 export const requestLinks = () => (dispatch) => {
@@ -11,3 +12,8 @@ export const requestLinks = () => (dispatch) => {
     .then(data => dispatch({ type: REQUEST_LINKS_SUCCESS, payload: data}))
     .catch(error => dispatch({type: REQUEST_LINKS_FAILED, payload: error}))
 };
+
+export const selectShelter = (text) => ({
+    type: SELECTED_SHELTER,
+    payload: text
+});

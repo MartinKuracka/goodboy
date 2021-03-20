@@ -1,16 +1,18 @@
 import {
     REQUEST_LINKS_PENDING,
     REQUEST_LINKS_SUCCESS,
-    REQUEST_LINKS_FAILED
+    REQUEST_LINKS_FAILED,
+    SELECTED_SHELTER
 } from './selecttype_constants';
 
-const initialState = {
+const initialState1 = {
     isPending: false,
     shelters: [],
     error: '',
+    ShelterID: ''
 };
 
-export const selectShelter = (state=initialState, action) => {
+export const selectShelter = (state=initialState1, action) => {
     switch(action.type) {
         case REQUEST_LINKS_PENDING:
             return Object.assign({}, state, {isPending: true});
@@ -18,8 +20,9 @@ export const selectShelter = (state=initialState, action) => {
             return Object.assign({}, state, {shelters: action.payload, isPending: false});
         case REQUEST_LINKS_FAILED:
             return Object.assign({}, state, {error: action.payload, isPending: false});
+        case SELECTED_SHELTER:
+            return Object.assign({}, state, {ShelterID: action.payload});
         default:
             return state;
     }
 };
-

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {requestLinks} from './selecttype_actions';
+import {requestLinks, selectShelter} from './selecttype_actions';
 import SheltersList from './shelterslist';
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        selected: (e) => console.log('selected',e.target.id),
+        selected: (id) => dispatch(selectShelter(id)),
         selectLink: () => dispatch(requestLinks())
     }
 }
@@ -49,9 +49,11 @@ class SelectType extends React.Component {
 
     componentDidMount() {
         this.props.selectLink();
-        setTimeout(() => {
-            sheltersList = this.props.shelters;
-        },1000);
+    }
+
+    sendId = (e) => {
+        const id = e.target[e.target.selectedIndex].id;
+        this.props.selected(id)
     }
 
     render() {
@@ -63,8 +65,9 @@ class SelectType extends React.Component {
                 </TopText>
                 <Select>
                     <h3>Útulok</h3>
-                    <select style={selector} name="útulky" onChange={this.props.selected}>
-                        <option id='1'>Vyberte útulok zo zoznamu</option>
+                    <select style={selector} name="útulky" onChange={this.sendId}>
+                        <option id='0'>Vyberte útulok zo zoznamu</option>
+                        <option id='1'>dalsi</option>
                         <SheltersList />
                     </select>
                 </Select>
