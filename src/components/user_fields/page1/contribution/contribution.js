@@ -48,6 +48,8 @@ const Image = styled.img `
 `
 
 const Text = styled.p `
+    font-weight:600;
+    font-size: 1.2rem;
     color: ${props => props.active ? 'var(--on_primary)' : "black"};
 `
 

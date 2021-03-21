@@ -1,0 +1,1 @@
+export const SELECT_AMOUNT = 'SELECT_AMOUNT';

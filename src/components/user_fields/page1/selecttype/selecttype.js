@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {requestLinks, selectShelter} from './selecttype_actions';
 import SheltersList from './shelterslist';
 
 const mapStateToProps = (state) => {
@@ -12,17 +11,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        selected: (id) => dispatch(selectShelter(id)),
-        selectLink: () => dispatch(requestLinks())
-    }
-}
-
 const Wrapper = styled.div `
     position:relative;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 50px;
 `;
 
 const TopText = styled.div `
@@ -31,30 +23,18 @@ const TopText = styled.div `
 `
 const Select = styled.div `
     width: 100%;
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 15px;
     border: var(--border);
     border-radius: var(--radius);
     box-sizing: border-box;
 `;
 
-const selector = {
-    'width': '100%',
-    'border' : '0px'
-}
 
 var sheltersList = [];
 
 class SelectType extends React.Component {
 
-    componentDidMount() {
-        this.props.selectLink();
-    }
-
-    sendId = (e) => {
-        const id = e.target[e.target.selectedIndex].id;
-        this.props.selected(id)
-    }
 
     render() {
         return(
@@ -65,15 +45,11 @@ class SelectType extends React.Component {
                 </TopText>
                 <Select>
                     <h3>Útulok</h3>
-                    <select style={selector} name="útulky" onChange={this.sendId}>
-                        <option id='0'>Vyberte útulok zo zoznamu</option>
-                        <option id='1'>dalsi</option>
-                        <SheltersList />
-                    </select>
+                    <SheltersList />
                 </Select>
             </Wrapper>
         )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectType);
+export default connect(mapStateToProps, null)(SelectType);

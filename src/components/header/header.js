@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Text = styled.h1 `
     margin-top: 50px;
     font-size: 46px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1;
 `
 

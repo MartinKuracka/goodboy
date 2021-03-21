@@ -6,7 +6,7 @@ import {
 } from './selecttype_constants';
 
 const initialState1 = {
-    isPending: false,
+    isPending: true,
     shelters: [],
     error: '',
     ShelterID: ''

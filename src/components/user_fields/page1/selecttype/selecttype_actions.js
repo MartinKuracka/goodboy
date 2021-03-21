@@ -13,7 +13,7 @@ export const requestLinks = () => (dispatch) => {
     .catch(error => dispatch({type: REQUEST_LINKS_FAILED, payload: error}))
 };
 
-export const selectShelter = (text) => ({
+export const selectShelter2 = (text) => ({
     type: SELECTED_SHELTER,
     payload: text
 });
