@@ -28,6 +28,9 @@ h4,
 h5,
 h6,
 p {
-  margin: 0px;
-  
+  margin: 0px;  
+}
+
+button {
+  outline: none;
 }

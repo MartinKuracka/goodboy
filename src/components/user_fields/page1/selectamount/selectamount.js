@@ -40,8 +40,9 @@ const Amount = styled.input `
 `
 class SelectAmount extends React.Component {
 
-    userinput = (value) => {
-        this.props.updateValue(value);
+    handleChange = (e) => {
+        console.log(e)
+        this.props.updateValue(e.target.value)        
     }
 
     render() {
@@ -49,13 +50,13 @@ class SelectAmount extends React.Component {
             <div>
                 <Text>Suma, ktorou chem prispieť</Text>
                 <Wrapper>
-                    <Amount type='button' value='5€' onChange={this.userinput}></Amount>
-                    <Amount type='button' value='10€' onChange={this.userinput}></Amount>
-                    <Amount type='button' value='20€' onChange={this.userinput}></Amount>
-                    <Amount type='button' value='30€' onChange={this.userinput}></Amount>
-                    <Amount type='button' value='50€' onChange={this.userinput}></Amount>
-                    <Amount type='button' value='100€' onChange={this.userinput}></Amount>
-                    <Amount type='number' onChange={this.userinput} placeholder='_____€'></Amount>
+                    <Amount type='button' value='5€' onClick={this.handleChange}></Amount>
+                    <Amount type='button' value='10€' onClick={this.handleChange}></Amount>
+                    <Amount type='button' value='20€' onClick={this.handleChange}></Amount>
+                    <Amount type='button' value='30€' onClick={this.handleChange}></Amount>
+                    <Amount type='button' value='50€' onClick={this.handleChange}></Amount>
+                    <Amount type='button' value='100€' onClick={this.handleChange}></Amount>
+                    <Amount type='number' onChange={this.handleChange} placeholder='_____€' onClick={this.handleChange}></Amount>
                 </Wrapper>
             </div>
            

@@ -22,7 +22,31 @@ const Wrapper = styled.div `
     position: relative;
     width: 100%;
 `
-
+const ButtonsWrapper = styled.div `
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top:60px;
+    
+`
+const ButtonNext = styled.button `
+    padding: 15px;
+    font-family: 'Hind', sans-serif;
+    font-size: font-size: 22px;
+    font-weight: 600;
+    border-radius: 30%;
+    background-color: var(--subtle);
+    ${'' /* color: var(--background); */}
+`
+const ButtonBack = styled.button `
+    padding: 15px;
+    font-family: 'Hind', sans-serif;
+    font-size: font-size: 22px;
+    font-weight: 600;
+    border-radius: 30%;
+    background-color: var(--primary);
+    color: var(-background);
+`
 
 class UserField extends React.Component {
 
@@ -33,7 +57,7 @@ class UserField extends React.Component {
     render() {
         return(
             <Wrapper>
-            <Page1/>
+                <Page1/>
                 {/* <div>
                 { if (this.props.page === 1) {
                     return <Page1 />
@@ -41,6 +65,10 @@ class UserField extends React.Component {
                     return <Page2 />
                 } else return <Page3 /> }
                 </div> */}
+                <ButtonsWrapper>
+                    <ButtonBack value='back'>Späť</ButtonBack>
+                    <ButtonNext value='next'>Pokračovať</ButtonNext>
+                </ButtonsWrapper>
              </Wrapper>
         )
     }
