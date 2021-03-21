@@ -37,14 +37,14 @@ class SheltersList extends React.Component {
     render() {
         // const { isPending, shelters} = this.props;
         if (this.props.isPending === false) {
-            var listOfShelters = this.props.shelters;
-            console.log('loaded', typeof(listOfShelters), listOfShelters)
+            var listOfShelters = this.props.shelters.shelters;
+            console.log('Is array??', Array.isArray(listOfShelters), listOfShelters)
             return (
                 <div>
                     <select style={this.selector} name="útulky" onChange={this.sendId}>
-                    { listOfShelters.shelters.map(function(shelter, i) {
+                    { listOfShelters.map((shelter) => (
                         <option id={shelter.id}>{shelter.name}</option>
-                    })}
+                    ))}
                     </select>
                 </div>
             )
