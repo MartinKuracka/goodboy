@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Contribution from './contribution/contribution';
 import SelectType from './selecttype/selecttype';
 import SelectAmount from './selectamount/selectamount';
+
+const mapStateToProps = (state) => {
+    return {
+        contributiontype: state.contributiontype
+    }
+}
+
 
 const Wrapper = styled.div `
     position: relative;
@@ -19,4 +27,4 @@ const Page1 = () => {
     )  
 }
 
-export default Page1;
+export default connect(mapStateToProps, null)(Page1);

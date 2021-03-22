@@ -16,6 +16,12 @@ const mapDispatchToProps = (dispatch) => {
         contributionValue: (e) => dispatch(selectType(e))
     }
 }
+// var contribution = 'whole';
+
+// const functin = (e) => {
+//     console.log(e)
+//     contribution = e;
+// }
 
 const Container = styled.div `
     width: 100%;
@@ -25,21 +31,24 @@ const Container = styled.div `
 `;
 
 const Option1 = styled.div `
+    cursor: pointer;
     width:50%;
     padding: 15px;
-    background-color: ${props => props.active ? 'var(--primary)' : 'var(--background)'};
+    background-color: ${({ active }) => active ? 'var(--primary)' : 'var(--background)'};
     border-radius: 24px 0px 0px 24px;
     border: var(--border_primary);
+    color: ${({ active }) => active ? 'var(--background)' : 'black'};
 `;
 
 const Option2 = styled.div `
+    cursor: pointer;
     width:50%;
     padding: 15px;
-    background-color: ${props => props.state = 'active' ? 'var(--primary)' : 'var(--background)'};
+    background-color: ${({ active }) => active ? "var(--primary)" : "var(--background)"};
     overflow: hidden;
     border-radius: 0px 24px  24px 0px;
     border: var(--border_primary);
-    color: white;
+    color: ${({ active }) => active ? 'var(--background)' : 'black'};
 `;
 
 const Image = styled.img `
@@ -50,37 +59,54 @@ const Image = styled.img `
 const Text = styled.p `
     font-weight:600;
     font-size: 1.2rem;
-    color: ${props => props.active ? 'var(--on_primary)' : "black"};
 `
 
-
 class Contribution extends React.Component {
-    // contributionType = (e) => {
-    //     console.log('contribution type', e)
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+          activeOption1: false,
+          activeOption2: true,
+        };
+      }
 
-    option1 = () => {
+
+
+    option1 = (e) => {
+        this.setState({
+            activeOption1: true,
+            activeOption2: false,
+        });
+        // functin('single');
         this.props.contributionValue('single');
+        
     }
 
-    option2 = () => {
+    option2 = (e) => {
+        this.setState({
+            activeOption1: false,
+            activeOption2: true,
+        });
+        // functin('whole');
         this.props.contributionValue('whole');
+        
     }
 
     render() {
-        return(
-            <Container>
-                <Option1 onClick={this.option1}>
+            return (
+                <Container>
+                <Option1 id='1' onClick={this.option1} active={this.state.activeOption1}>
                     <Image src={Icon1}/>
                     <Text>Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
-                <Option2 onClick={this.option2}>
+                <Option2 id='2' onClick={this.option2} active={this.state.activeOption2}>
                     <Image src={Icon2}/>
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
             </Container>
-        )
+            )
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contribution);
