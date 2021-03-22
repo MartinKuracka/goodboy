@@ -1,7 +1,7 @@
 import {PAGE_NUMBER} from './userfields_constants';
 
 const initialState = {
-    page: '1'
+    page: 1
 }
 
 export const pageNumber = (state=initialState, action) => {

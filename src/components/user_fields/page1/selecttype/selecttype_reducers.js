@@ -9,7 +9,7 @@ const initialState1 = {
     isPending: true,
     shelters: [],
     error: '',
-    ShelterID: ''
+    shelterID: ''
 };
 
 export const selectShelter = (state=initialState1, action) => {
@@ -21,7 +21,7 @@ export const selectShelter = (state=initialState1, action) => {
         case REQUEST_LINKS_FAILED:
             return Object.assign({}, state, {error: action.payload, isPending: false});
         case SELECTED_SHELTER:
-            return Object.assign({}, state, {ShelterID: action.payload});
+            return Object.assign({}, state, {shelterID: action.payload});
         default:
             return state;
     }
