@@ -30,6 +30,7 @@ class SheltersList extends React.Component {
 
 
     sendId = (e) => {
+        console.log(e);
         const id = e.target[e.target.selectedIndex].id;
         this.props.selected(id)
     }

@@ -36,13 +36,20 @@ const Amount = styled.input `
     border: var(--border);
     border-radius: var(--radius);
     text-align: center;
-    background-color: var(--background)
+    background-color: var(--background);
+    outline:none;
 `
 class SelectAmount extends React.Component {
 
     handleChange = (e) => {
         console.log(e)
-        this.props.updateValue(e.target.value)        
+        this.props.updateValue(e.target.value);
+        for (var i = 0; i < e.target.parentNode.children.length; i++) {
+            e.target.parentNode.children[i].style.backgroundColor = 'var(--background)';
+            e.target.parentNode.children[i].style.color = 'black'
+        }
+        e.target.style.backgroundColor = 'var(--primary)';
+        e.target.style.color = 'var(--on_primary)';
     }
 
     render() {
@@ -59,7 +66,7 @@ class SelectAmount extends React.Component {
                     <Amount type='number' onChange={this.handleChange} placeholder='_____€' onClick={this.handleChange}></Amount>
                 </Wrapper>
             </div>
-           
+
         )
     }
 }
