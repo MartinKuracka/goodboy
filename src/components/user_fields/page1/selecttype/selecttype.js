@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
         isPending: state.isPending,
         shelters: state.shelters,
         error: state.error,
+        contributiontype: state.contributionType.contributiontype
     }
 }
 
@@ -30,18 +31,16 @@ const Select = styled.div `
     box-sizing: border-box;
 `;
 
-
-var sheltersList = [];
-
 class SelectType extends React.Component {
-
-
     render() {
         return(
             <Wrapper>
                 <TopText>
                     <h3>Najviac mi záleží na útulku</h3>
-                    <h4>Nepovinné</h4>
+                    {this.props.contributiontype === 'single'
+                        ? <h4>Povinné</h4>
+                        : <h4>Nepovinné</h4>
+                    }
                 </TopText>
                 <Select>
                     <h3>Útulok</h3>

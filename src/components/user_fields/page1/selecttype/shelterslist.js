@@ -43,8 +43,8 @@ class SheltersList extends React.Component {
             return (
                 <div>
                     <select style={this.selector} name="útulky" onChange={this.sendId}>
-                    { listOfShelters.map((shelter) => (
-                        <option id={shelter.id}>{shelter.name}</option>
+                    { listOfShelters.map((shelter, i) => (
+                        <option key={i} id={shelter.id}>{shelter.name}</option>
                     ))}
                     </select>
                 </div>

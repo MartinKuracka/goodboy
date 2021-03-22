@@ -8,11 +8,12 @@ import {pageNumberAction} from './userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
-        page: state.pageNumber.value
+        page: state.pageNumber.page
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
+    console.log('som tu')
     return {
         setPage: (value) => dispatch(pageNumberAction(value))
     }
@@ -27,7 +28,7 @@ const ButtonsWrapper = styled.div `
     display: inline-flex;
     justify-content: space-between;
     margin-top:60px;
-    
+
 `
 const ButtonNext = styled.button `
     padding: 15px;
@@ -54,20 +55,24 @@ class UserField extends React.Component {
         this.props.setPage(value);
     }
 
+    nextPage = () => {
+        if (this.props.page === '1') {
+            this.props.setPage('2');
+        }
+    }
+
     render() {
         return(
             <Wrapper>
-                <Page1/>
-                {/* <div>
-                { if (this.props.page === 1) {
-                    return <Page1 />
-                } else if (this.props.page === 2 ) {
-                    return <Page2 />
-                } else return <Page3 /> }
-                </div> */}
+                {this.props.page === '1'
+                    ? <Page1/>
+                    : this.props.page === '2'
+                        ? <Page2 />
+                        : <Page3 />
+                }
                 <ButtonsWrapper>
-                    <ButtonBack value='back'>Späť</ButtonBack>
-                    <ButtonNext value='next'>Pokračovať</ButtonNext>
+                    {this.props.page != '1' ? <ButtonBack value='back' onClick={this.backPage}>Späť</ButtonBack> : false}
+                    <ButtonNext value='next' onClick={this.nextPage}>Pokračovať</ButtonNext>
                 </ButtonsWrapper>
              </Wrapper>
         )
