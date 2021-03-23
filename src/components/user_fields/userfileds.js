@@ -8,15 +8,11 @@ import {pageNumberAction} from './userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
-        page: state.pageNumber.page,
-        contributiontype: state.contributionType.contributiontype,
-        shelterID: state.selectShelter.shelterID,
-        value: state.selectValue.value
+        page: state.pageNumber.page
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('som tu')
     return {
         setPage: (value) => dispatch(pageNumberAction(value))
     }
@@ -51,20 +47,8 @@ const ButtonBack = styled.button `
     background-color: var(--primary);
     color: var(-background);
 `
-class UserField extends React.Component {
 
-    page1Validate = () => {
-        const {contributiontype, shelterID, value} = this.props;
-        if (contributiontype === 'single' && (shelterID == '' || value == '')) {
-            console.log('prosim vyplnte vsetky pozadovane polia');
-            return (false);
-        } else if (contributiontype === 'whole' && value === '') {
-            console.log('prosim vyberte sumu dotacie');
-            return (false);
-        }
-        console.log('preslo do true')
-        return (true);
-    }
+class UserField extends React.Component {
 
     selectedPage = (value) => {
         this.props.setPage(value);
@@ -72,15 +56,14 @@ class UserField extends React.Component {
 
     nextPage = () => {
         if (this.props.page === 1) {
-            if (this.page1Validate()) {
-                this.props.setPage(2);
-            }
+            this.props.setPage(2);
         }
     }
 
     backPage = () => {
-        this.props.setPage(this.props.page - 1)
-        // this.props.setPage(Number(this.props.setPage) - 1);
+        if (this.props.page != 1 ) {
+            this.props.setPage(this.props.page -1);
+        }
     }
 
     render() {
