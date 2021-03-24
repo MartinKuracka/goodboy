@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Wrapper = styled.div `
     display: ${props => props.second ? 'inline-flex' : null};
-    margin-top: ${props => props.second ? '30px' : null};
+    ${'' /* margin-top: ${props => props.second ? '30px' : null}; */}
     align-items: baseline;
     position: relative;
     width: 100%;
@@ -37,7 +37,7 @@ const Text = styled.p `
     color: grey;
 `
 const Label = styled.label `
-    margin-top: 65px;
+    margin-top: 20px;
     font-weight: 600;
     margin-left: ${props => props.checkboxInfo ? '10px' : null }
 `
@@ -45,6 +45,7 @@ const Input = styled.input `
     font-size: 1rem;
     box-sizing: border-box;
     border: none;
+    padding: ${props => props.checkbox ? '10px' : null}
 `
 const FieldWrap = styled.div `
     margin-top: 20px;
@@ -53,7 +54,8 @@ const FieldWrap = styled.div `
 class Page3 extends React.Component {
 
     userThick = (e) => {
-        e.target.checked ? this.props.userAgreeAction('yes') : this.props.userAgreeAction('no');
+        console.log(e.target.checked)
+        e.target.checked === true ? this.props.userAgreeAction('yes') : this.props.userAgreeAction('no');
     }
 
     render() {
@@ -92,7 +94,7 @@ class Page3 extends React.Component {
                 </FieldWrap>
                 <FieldWrap>
                     <Wrapper second>
-                        <Input type='checkbox' id='check' checkbox onChange={this.userThick}/>
+                        <Input type='checkbox' id='check' onChange={this.userThick}  checkbox/>
                         <Label htmlFor='check' checkboxInfo>Súhlasím so spracovaním mojich osobných <a href='#'>údajov</a></Label>
                     </Wrapper>
                 </FieldWrap>

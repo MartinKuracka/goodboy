@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
         lastName: state.userData.lastName,
         email: state.userData.email,
         phone: state.userData.phone,
-        useragrees: state.userData.useragrees
+        useragrees: state.userAgree.useragrees
     }
 }
 
@@ -34,29 +34,25 @@ const Wrapper = styled.div `
     width: 100%;
     height:100%;
 `
+const TextWrapper = styled.div `
+    min-height: 530px;
+`
 const ButtonsWrapper = styled.div `
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
     margin-top:60px;
 `
-const buttonDiv = styled.div `
-    width: 50%;
-    align-content: ${props => props.secondary ? 'start' : 'end'}
-`
-
 const Button = styled.button `
-    padding: ${props => props.large ? '25px 30px' : '10px 15px'};
-    width: ${props => props.large ? '10rem' : '8rem'};
+    padding: 10px 15px;
+    width: 8rem;
     font-family: 'Hind', sans-serif;
     font-size: 15px;
     font-weight: 600;
-    border-radius: ${props => props.large ? '45px' : '25px'};
+    border-radius: 25px;
     border: 2px solid;
-    background-color: ${props => props.secondary ? 'var(--background)' : 
-        props.large ? 'var(--subtle)' : 'var(--primary)'};
-    color: ${props => props.secondary ? 'var(--primary)' : 
-        props.large ? 'black': 'var(--background)'};
+    background-color: ${props => props.secondary ? 'var(--background)' : 'var(--primary)'};
+    color: ${props => props.secondary ? 'var(--primary)' : 'var(--background)'};
 `
 class UserField extends React.Component {
 
@@ -123,12 +119,14 @@ class UserField extends React.Component {
     render() {
         return(
             <Wrapper>
+                <TextWrapper>
                 {this.props.page === 1
                     ? <Page1/>
                     : this.props.page === 2
                         ? <Page2 />
                         : <Page3 />
                 }
+                </TextWrapper>
                 <ButtonsWrapper>
                     <buttonDiv>
                        {this.props.page != 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
