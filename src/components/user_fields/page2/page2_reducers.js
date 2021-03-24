@@ -2,8 +2,7 @@ import {
     USER_NAME,
     USER_SURNAME,
     USER_EMAIL,
-    USER_PHONE,
-    USER_AGREES
+    USER_PHONE
 } from './page2_constants'
 
 const initialState = {
@@ -11,7 +10,6 @@ const initialState = {
     lastName: '',
     email: '',
     phone: '',
-    useragrees: 'no'
 }
 
 export const userData = (state=initialState, action) => {
@@ -24,8 +22,6 @@ export const userData = (state=initialState, action) => {
             return Object.assign({}, state, {email: action.payload});
         case USER_PHONE:
             return Object.assign({}, state, {phone: action.payload});
-        case USER_AGREES:
-            return Object.assign({}, state, {useragrees: action.payload});
         default:
             return state;
     }

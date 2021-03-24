@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 
 const Text = styled.h1 `
-    margin-top: 50px;
+    margin: 50px 0px;
     font-size: 46px;
     font-weight: 600;
     line-height: 1;

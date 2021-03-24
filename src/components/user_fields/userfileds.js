@@ -74,26 +74,22 @@ class UserField extends React.Component {
         const {firstName,lastName, email, phone, useragrees} = this.props;
         const mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
         const phoneformat = /([+]?\d{1,3}[. \s]?)?(\d{12}?)/g;
-        if (useragrees === 'yes') {
-            if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length != 0) {
-                console.log('meno musi mat 2 az 20 znakov');
-                return (false);
-            } else if (!(lastName.length <= 30 && lastName.length >= 2) || lastName.length === 0) {
-                console.log('priezvisko musi mat 2 az 30 znakov');
-                return (false);
-            } else if (email.length === 0 || !email.match(mailformat)) {
-                console.log('prosim vlozte platny e-mail');
-                return (false);
-            } else if (phone.length === 0 || !phone.match(phoneformat)) {
-                console.log('prosim zadajte platne telefonne cislo');
-                return (false);
-            }
-            return (true);
-        } else {
-            console.log('Musite suhlasit s podmienkami');
+        if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length != 0) {
+            console.log('meno musi mat 2 az 20 znakov');
+            return (false);
+        } else if (!(lastName.length <= 30 && lastName.length >= 2) || lastName.length === 0) {
+            console.log('priezvisko musi mat 2 az 30 znakov');
+            return (false);
+        } else if (email.length === 0 || !email.match(mailformat)) {
+            console.log('prosim vlozte platny e-mail');
+            return (false);
+        } else if (phone.length === 0 || !phone.match(phoneformat)) {
+            console.log('prosim zadajte platne telefonne cislo');
             return (false);
         }
+        return (true);
     }
+
 
     selectedPage = (value) => {
         this.props.setPage(value);
@@ -107,7 +103,7 @@ class UserField extends React.Component {
         } else if (this.props.page === 2) {
             if (this.validatePage2() === true) {
                 console.log('form validated')
-                // this.props.setPage(3);
+                this.props.setPage(3);
             }
         }
     }

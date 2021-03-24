@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {userName, userSurname, userEmail, userPhone, userAgrees} from './page2_actions';
+import {userName, userSurname, userEmail, userPhone} from './page2_actions';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch) => {
         updateSurname: (e) => dispatch(userSurname(e.target.value)),
         updateEmail: (e) => dispatch(userEmail(e.target.value)),
         updatePhone: (e) => dispatch(userPhone(e)),
-        userAgreeAction: (e) => dispatch(userAgrees(e))
     }
 }
 
@@ -53,7 +52,6 @@ const InputEl = styled.div `
     border: var(--border);
     border-radius: var(--radius);
 `
-
 const Input = styled.input `
     width: ${props => props.checkbox ? 'auto' : '100%' };
     font-size: 1rem;
@@ -77,10 +75,6 @@ const phonestyle = {
 };
 
 class Page2 extends React.Component {
-
-    userThick = (e) => {
-        e.target.checked ? this.props.userAgreeAction('yes') : this.props.userAgreeAction('no');
-    }
 
     render() {
         return(
@@ -125,8 +119,7 @@ class Page2 extends React.Component {
                         </Label>
                     </InputEl>
                     <Wrapper second>
-                        <Input type='checkbox' id='check' checkbox onChange={this.userThick}/>
-                        <Label htmlFor='check' checkboxInfo>Súhlasím so spracovaním osobných <a href='#'>údajov</a></Label>
+                        
                     </Wrapper>
     
                 </Form>

@@ -25,8 +25,3 @@ export const userPhone = (value) => ({
     type: USER_PHONE,
     payload: value
 });
-
-export const userAgrees = (value) => ({
-    type: USER_AGREES,
-    payload: value
-});

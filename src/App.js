@@ -6,6 +6,7 @@ import {selectShelter} from './components/user_fields/page1/selecttype/selecttyp
 import {selectValue} from './components/user_fields/page1/selectamount/selectamount_reducer';
 import {pageNumber} from './components/user_fields/userfields_reducers';
 import {userData} from './components/user_fields/page2/page2_reducers';
+import {userAgree} from './components/user_fields/page3/page3_reducers';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import './App.css';
@@ -20,7 +21,7 @@ import UserField from './components/user_fields/userfileds';
 // import styled from 'styled-components';
 
 const logger = createLogger();
-const rootReducer = combineReducers({contributionType, selectShelter, selectValue, pageNumber, userData});
+const rootReducer = combineReducers({contributionType, selectShelter, selectValue, pageNumber, userData, userAgree});
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 const TextSection = styled.div `
