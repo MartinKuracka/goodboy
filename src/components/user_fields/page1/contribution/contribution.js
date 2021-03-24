@@ -16,12 +16,6 @@ const mapDispatchToProps = (dispatch) => {
         contributionValue: (e) => dispatch(selectType(e))
     }
 }
-// var contribution = 'whole';
-
-// const functin = (e) => {
-//     console.log(e)
-//     contribution = e;
-// }
 
 const Container = styled.div `
     width: 100%;
@@ -70,14 +64,11 @@ class Contribution extends React.Component {
         };
       }
 
-
-
     option1 = (e) => {
         this.setState({
             activeOption1: true,
             activeOption2: false,
         });
-        // functin('single');
         this.props.contributionValue('single');
         
     }
@@ -87,7 +78,6 @@ class Contribution extends React.Component {
             activeOption1: false,
             activeOption2: true,
         });
-        // functin('whole');
         this.props.contributionValue('whole');
         
     }

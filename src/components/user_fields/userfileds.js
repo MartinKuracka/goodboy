@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Page1 from './page1/page1';
 import Page2 from './page2/page2';
@@ -19,35 +19,35 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const Wrapper = styled.div `
+    display: flex;
+    flex-direction: column;
     position: relative;
+    justify-content: space-between;
     width: 100%;
+    height:100%;
 `
 const ButtonsWrapper = styled.div `
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
     margin-top:60px;
-
 `
-const ButtonNext = styled.button `
-    padding: 15px;
-    font-family: 'Hind', sans-serif;
-    font-size: font-size: 22px;
-    font-weight: 600;
-    border-radius: 30%;
-    background-color: var(--subtle);
-    ${'' /* color: var(--background); */}
-`
-const ButtonBack = styled.button `
-    padding: 15px;
-    font-family: 'Hind', sans-serif;
-    font-size: font-size: 22px;
-    font-weight: 600;
-    border-radius: 30%;
-    background-color: var(--primary);
-    color: var(-background);
+const buttonDiv = styled.div `
+    width: 50%;
+    align-content: ${props => props.secondary ? 'start' : 'end'}
 `
 
+const Button = styled.button `
+    padding: 10px 15px;
+    width: 8rem;
+    font-family: 'Hind', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 25px;
+    border: 2px solid;
+    background-color: ${props => props.secondary ? 'var(--background)' : 'var(--primary)'};
+    color: ${props => props.secondary ? 'var(--primary)' : 'var(--background)'};
+`
 class UserField extends React.Component {
 
     selectedPage = (value) => {
@@ -76,8 +76,12 @@ class UserField extends React.Component {
                         : <Page3 />
                 }
                 <ButtonsWrapper>
-                    {this.props.page != 1 ? <ButtonBack value='back' onClick={this.backPage}>Späť</ButtonBack> : false}
-                    <ButtonNext value='next' onClick={this.nextPage}>Pokračovať</ButtonNext>
+                    <buttonDiv>
+                       {this.props.page != 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
+                    </buttonDiv>
+                    <buttonDiv>
+                        <Button value='next' onClick={this.nextPage}>Pokračovať</Button>
+                    </buttonDiv>
                 </ButtonsWrapper>
              </Wrapper>
         )

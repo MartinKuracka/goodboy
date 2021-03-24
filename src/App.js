@@ -25,6 +25,7 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 
 const TextSection = styled.div `
   width: 60%;
+  min-height: 790px;
   display: flex;
   align-items:flex-start;
   flex-direction: column;
