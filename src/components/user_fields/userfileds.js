@@ -11,7 +11,12 @@ const mapStateToProps = (state) => {
         page: state.pageNumber.page,
         contributiontype: state.contributionType.contributiontype,
         shelterID: state.selectShelter.shelterID,
-        value: state.selectValue.value
+        value: state.selectValue.value,
+        firstName: state.userData.firstName,
+        lastName: state.userData.lastName,
+        email: state.userData.email,
+        phone: state.userData.phone,
+        useragrees: state.userData.useragrees
     }
 }
 
@@ -54,7 +59,7 @@ const Button = styled.button `
 class UserField extends React.Component {
 
     validatePage1 = () => {
-        const {contributiontype, page, shelterID, value} = this.props;
+        const {contributiontype, shelterID, value} = this.props;
         if (contributiontype === 'single' && (shelterID === '' || value === '')) {
             console.log('vyplnte prosim pozadovane polia');
             return (false);
@@ -65,6 +70,31 @@ class UserField extends React.Component {
         return (true);
     }
 
+    validatePage2 = () => {
+        const {firstName,lastName, email, phone, useragrees} = this.props;
+        const mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        const phoneformat = /([+]?\d{1,3}[. \s]?)?(\d{12}?)/g;
+        if (useragrees === 'yes') {
+            if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length != 0) {
+                console.log('meno musi mat 2 az 20 znakov');
+                return (false);
+            } else if (!(lastName.length <= 30 && lastName.length >= 2) || lastName.length === 0) {
+                console.log('priezvisko musi mat 2 az 30 znakov');
+                return (false);
+            } else if (email.length === 0 || !email.match(mailformat)) {
+                console.log('prosim vlozte platny e-mail');
+                return (false);
+            } else if (phone.length === 0 || !phone.match(phoneformat)) {
+                console.log('prosim zadajte platne telefonne cislo');
+                return (false);
+            }
+            return (true);
+        } else {
+            console.log('Musite suhlasit s podmienkami');
+            return (false);
+        }
+    }
+
     selectedPage = (value) => {
         this.props.setPage(value);
     }
@@ -73,6 +103,11 @@ class UserField extends React.Component {
         if (this.props.page === 1) {
             if (this.validatePage1() === true) {
                 this.props.setPage(2);
+            }
+        } else if (this.props.page === 2) {
+            if (this.validatePage2() === true) {
+                console.log('form validated')
+                // this.props.setPage(3);
             }
         }
     }
