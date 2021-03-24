@@ -46,15 +46,17 @@ const buttonDiv = styled.div `
 `
 
 const Button = styled.button `
-    padding: 10px 15px;
-    width: 8rem;
+    padding: ${props => props.large ? '25px 30px' : '10px 15px'};
+    width: ${props => props.large ? '10rem' : '8rem'};
     font-family: 'Hind', sans-serif;
     font-size: 15px;
     font-weight: 600;
-    border-radius: 25px;
+    border-radius: ${props => props.large ? '45px' : '25px'};
     border: 2px solid;
-    background-color: ${props => props.secondary ? 'var(--background)' : 'var(--primary)'};
-    color: ${props => props.secondary ? 'var(--primary)' : 'var(--background)'};
+    background-color: ${props => props.secondary ? 'var(--background)' : 
+        props.large ? 'var(--subtle)' : 'var(--primary)'};
+    color: ${props => props.secondary ? 'var(--primary)' : 
+        props.large ? 'black': 'var(--background)'};
 `
 class UserField extends React.Component {
 
@@ -114,6 +116,10 @@ class UserField extends React.Component {
         }
     }
 
+    submitForm = () => {
+        this.props.useragrees === 'yes' ? console.log('submitted') : console.log('Musite suhlasit so spracovanim udajov')
+    }
+
     render() {
         return(
             <Wrapper>
@@ -128,7 +134,9 @@ class UserField extends React.Component {
                        {this.props.page != 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
                     </buttonDiv>
                     <buttonDiv>
-                        <Button value='next' onClick={this.nextPage}>Pokračovať</Button>
+                        {this.props.page === 3
+                            ? <Button value='next' onClick={this.submitForm} large>ODOSLAŤ</Button>
+                            : <Button value='next' onClick={this.nextPage}>Pokračovať</Button>}
                     </buttonDiv>
                 </ButtonsWrapper>
              </Wrapper>
