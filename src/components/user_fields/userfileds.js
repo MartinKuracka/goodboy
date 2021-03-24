@@ -8,7 +8,10 @@ import {pageNumberAction} from './userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
-        page: state.pageNumber.page
+        page: state.pageNumber.page,
+        contributiontype: state.contributionType.contributiontype,
+        shelterID: state.selectShelter.shelterID,
+        value: state.selectValue.value
     }
 }
 
@@ -50,13 +53,27 @@ const Button = styled.button `
 `
 class UserField extends React.Component {
 
+    validatePage1 = () => {
+        const {contributiontype, page, shelterID, value} = this.props;
+        if (contributiontype === 'single' && (shelterID === '' || value === '')) {
+            console.log('vyplnte prosim pozadovane polia');
+            return (false);
+        } else if (contributiontype === 'whole' && value === '') {
+            console.log('zvolte prosim sumu prispevku');
+            return (false);
+        }
+        return (true);
+    }
+
     selectedPage = (value) => {
         this.props.setPage(value);
     }
 
     nextPage = () => {
         if (this.props.page === 1) {
-            this.props.setPage(2);
+            if (this.validatePage1() === true) {
+                this.props.setPage(2);
+            }
         }
     }
 
