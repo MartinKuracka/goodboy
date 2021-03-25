@@ -74,7 +74,7 @@ class Page3 extends React.Component {
                 
                 <FieldWrap>
                     <Label>Suma ktorou chem pomôcť
-                         {value.includes('€') ? <Text>{value}</Text> : <Text>{value}€</Text>}
+                         <Text>{value}€</Text>
                     </Label>
                 </FieldWrap>
                 <FieldWrap>

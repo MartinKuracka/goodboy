@@ -113,7 +113,27 @@ class UserField extends React.Component {
     }
 
     submitForm = () => {
-        this.props.useragrees === 'yes' ? console.log('submitted') : console.log('Musite suhlasit so spracovanim udajov')
+        if (this.props.useragrees === 'yes') {
+            console.log('submitted');
+            fetch('https://frontend-assignment-api.goodrequest.com/api/v1/shelters/contribute', {
+                method: 'post',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                firstName: this.props.firstName,
+                lastName: this.props.firstName,
+                email: this.props.email,
+                phone: this.props.phone,
+                value: this.props.value,
+                shelterID: this.props.shelterID
+                })
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (response) {
+                    console.log(response)
+            }})
+            .catch(error => console.log('cannot send data', error))
+        }
     }
 
     render() {
