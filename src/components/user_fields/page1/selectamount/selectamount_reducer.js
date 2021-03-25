@@ -1,7 +1,7 @@
 import {SELECT_AMOUNT} from './selectamount_constants';
 
 const initialState1 = {
-    value: '',
+    value: 0,
 };
 
 export const selectValue = (state=initialState1, action) => {

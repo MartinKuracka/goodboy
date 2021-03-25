@@ -8,7 +8,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-
 const Text = styled.h1 `
     margin: 50px 0px;
     font-size: 46px;
@@ -19,14 +18,14 @@ const Text = styled.h1 `
 
 class Header extends React.Component{
     render() {
+        const {page} = this.props;
         return(
             <div>
-            { this.props.page === 1 ? <Text>Vyberte si možnosť, ako chcete pomôcť</Text> 
-                : this.props.page === 2 ? <Text>Potrebujeme od Vás zopár informácií</Text> 
-                    : <Text>Skontrolujte si zadané údaje</Text> 
-            }                
+            { page === 1 ? <Text>Vyberte si možnosť, ako chcete pomôcť</Text>
+                : page === 2 ? <Text>Potrebujeme od Vás zopár informácií</Text>
+                    : <Text>Skontrolujte si zadané údaje</Text>
+            }
             </div>
-            
         )
     }
 }

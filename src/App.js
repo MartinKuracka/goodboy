@@ -12,13 +12,10 @@ import './App.css';
 import Navbar from './components/navbar/navbar';
 import Header from './components/header/header';
 import styled from 'styled-components';
-// import UserField from './components/user_fields/userfields.js';
 import Image from './img/dog.png';
-// import PageIndicator from './img/Page indicator.png';
 import UserField from './components/user_fields/userfileds';
 import PageIndicator from './components/pageindicator/pageindicator';
 import Footer from './components/Footer/footer';
-// import styled from 'styled-components';
 
 const logger = createLogger();
 const rootReducer = combineReducers({contributionType, selectShelter, selectValue, pageNumber, userData, userAgree, changeMessage});
@@ -31,7 +28,7 @@ const TextSection = styled.div `
   align-items:flex-start;
   flex-direction: column;
   text-align: start;
-`;
+`
 
 const ImgSection = styled.div `
   width: 40%;
@@ -51,7 +48,6 @@ function App() {
           <Layout>
             <TextSection>
               <PageIndicator />
-              {/* <img src={PageIndicator} alt='icon'></img> */}
               <Header />
               <UserField />
             </TextSection>

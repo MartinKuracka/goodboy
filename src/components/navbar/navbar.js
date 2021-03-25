@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import fb from '../../img/fb.png';
 import instagram from '../../img/instagram.png';
-import './navbar.css';
-
 
 const Container = styled.div `
     padding-top: 10px;
@@ -13,7 +11,7 @@ const Container = styled.div `
     margin: 0px auto;
     color: var(--subtle);
     border-bottom: var(--border);
-`;
+`
 
 const Navbar = () => {
     return(

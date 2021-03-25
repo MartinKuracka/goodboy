@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Icon1 from '../../../../img/icon1.png';
 import Icon2 from '../../../../img/icon2.png';
 import {selectType} from './cont_actions';
-import {infoMessage} from '../../userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -15,7 +14,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         contributionValue: (e) => dispatch(selectType(e))
-        // userInfo: (value) => dispatch(infoMessage(value))
     }
 }
 
@@ -26,7 +24,7 @@ const Container = styled.div `
     display: flex;
     border-radius: 24px;
     box-shadow: var(--shadow)
-`;
+`
 
 const Option1 = styled.div `
     cursor: pointer;
@@ -36,8 +34,8 @@ const Option1 = styled.div `
     background: ${({ active }) => active ? 'var(--primary)' : 'var(--background)'};
     border-radius: 24px 0px 0px 24px;
     border: ${({ active }) => active ? '0' : 'var(--border_primary)'};
-    color: ${({ active }) => active ? 'var(--background)' : 'var(--border_primary)'};    
-`;
+    color: ${({ active }) => active ? 'var(--background)' : 'var(--border_primary)'};
+`
 
 const Option2 = styled.div `
     cursor: pointer;
@@ -45,11 +43,10 @@ const Option2 = styled.div `
     padding: 20px;
     box-sizing: border-box;
     background: ${({ active }) => active ? "var(--primary)" : "var(--background)"};
-    overflow: hidden;
     border-radius: 0px 24px  24px 0px;
     border: ${({ active }) => active ? '0' : 'var(--border_primary)'};
-    color: ${({ active }) => active ? 'var(--background)' : 'black'};    
-`;
+    color: ${({ active }) => active ? 'var(--background)' : 'black'};
+`
 
 const Image = styled.img `
     max-width: 80px;
@@ -78,7 +75,6 @@ class Contribution extends React.Component {
             activeOption2: false,
         });
         this.props.contributionValue('single');
-        
     }
 
     option2 = (e) => {
@@ -87,24 +83,23 @@ class Contribution extends React.Component {
             activeOption2: true,
         });
         this.props.contributionValue('whole');
-        
     }
 
     render() {
+        const {contributiontype} = this.props;
             return (
                 <Container>
                 <Option1 id='1' onClick={this.option1} active={this.state.activeOption1}>
-                    {this.props.contributiontype === 'single' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
+                    {contributiontype === 'single' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
                     <Text>Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
                 <Option2 id='2' onClick={this.option2} active={this.state.activeOption2}>
-                    {this.props.contributiontype === 'whole' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
+                    {contributiontype === 'whole' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
             </Container>
             )
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contribution);

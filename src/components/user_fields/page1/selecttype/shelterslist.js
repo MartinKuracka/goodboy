@@ -30,16 +30,14 @@ class SheltersList extends React.Component {
 
 
     sendId = (e) => {
-        console.log(e);
         const id = e.target[e.target.selectedIndex].id;
         this.props.selected(Number(id))
     }
 
     render() {
-        // const { isPending, shelters} = this.props;
-        if (this.props.isPending === false) {
-            var listOfShelters = this.props.shelters.shelters;
-            console.log('Is array??', Array.isArray(listOfShelters), listOfShelters)
+        const {isPending, shelters} = this.props;
+        if (isPending === false) {
+            var listOfShelters = shelters.shelters;
             return (
                 <div>
                     <select style={this.selector} name="útulky" onChange={this.sendId}>
@@ -50,8 +48,7 @@ class SheltersList extends React.Component {
                     </select>
                 </div>
             )
-        } else if (this.props.isPending === true) {
-            console.log('fetching')
+        } else if (isPending === true) {
             return (
                 <select style={this.selector} name="útulky" onChange={this.sendId}>
                     <option id='0'> Nahravam Data... </option>

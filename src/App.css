@@ -13,9 +13,10 @@
 
 .App {
   position: relative;
+  min-width: 1300px;
   max-width: 1440px;
   margin: 0px auto;
-  text-align: center;  
+  text-align: center;
 }
 
 .app-center {
@@ -24,13 +25,13 @@
 }
 
 h1,
-h2, 
+h2,
 h3,
-h4, 
+h4,
 h5,
 h6,
 p {
-  margin: 0px;  
+  margin: 0px;
 }
 
 button {

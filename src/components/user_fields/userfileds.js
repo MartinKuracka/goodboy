@@ -36,9 +36,7 @@ const Wrapper = styled.div `
     width: 100%;
     height:100%;
 `
-const TextWrapper = styled.div `
-    ${'' /* min-height: 530px; */}
-`
+
 const ButtonsWrapper = styled.div `
     width: 100%;
     display: inline-flex;
@@ -74,13 +72,13 @@ class UserField extends React.Component {
     }
 
     validatePage1 = () => {
-        const {contributiontype, shelterID, value} = this.props;
-        if (contributiontype === 'single' && (shelterID === '' || value === '')) {
-            this.props.userInfo('*zvoľte útulok a sumu príspevku');
+        const {contributiontype, shelterID, value, userInfo} = this.props;
+        if (contributiontype === 'single' && (shelterID === '' || value === 0)) {
+            userInfo('*zvoľte útulok a sumu príspevku');
             this.infoToUser();
             return (false);
-        } else if (contributiontype === 'whole' && value === '' || value === 0) {
-            this.props.userInfo('*zvoľte sumu prispevku');
+        } else if (contributiontype === 'whole' && value === 0) {
+            userInfo('*zvoľte sumu prispevku');
             this.infoToUser();
             return (false);
         }
@@ -88,72 +86,76 @@ class UserField extends React.Component {
     }
 
     validatePage2 = () => {
-        const {firstName,lastName, email, phone} = this.props;
+        const {firstName,lastName, email, phone, userInfo} = this.props;
         const mailformat = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
         const phoneformat = /([+]?\d{1,3}[. \s]?)?(\d{12}?)/g;
         if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length !== 0) {
-            this.props.userInfo('*meno musí obsahovať 2 až 20 znakov');
+            userInfo('*meno musí obsahovať 2 až 20 znakov');
             this.infoToUser();
             return (false);
         } else if (!(lastName.length <= 30 && lastName.length >= 2) || lastName.length === 0) {
-            this.props.userInfo('*priezvisko musí obsahovať 2 až 30 znakov');
+            userInfo('*priezvisko musí obsahovať 2 až 30 znakov');
             this.infoToUser();
             return (false);
         } else if (email.length === 0 || !email.match(mailformat)) {
-            this.props.userInfo('*prosím vložte platný e-mail');
+            userInfo('*prosím vložte platný e-mail');
             this.infoToUser();
             return (false);
         } else if (phone.length === 0 || !phone.match(phoneformat)) {
-            this.props.userInfo('*zadajte platné telefónne číslo');
+            userInfo('*zadajte platné telefónne číslo');
             this.infoToUser();
             return (false);
         }
         return (true);
     }
 
-
     selectedPage = (value) => {
         this.props.setPage(value);
     }
 
     nextPage = () => {
-        if (this.props.page === 1) {
+        const {page, setPage} = this.props;
+        if (page === 1) {
             if (this.validatePage1() === true) {
-                this.props.setPage(2);
+                setPage(2);
             }
-        } else if (this.props.page === 2) {
+        } else if (page === 2) {
             if (this.validatePage2() === true) {
                 console.log('form validated')
-                this.props.setPage(3);
+                setPage(3);
             }
         }
     }
 
     backPage = () => {
-        if (this.props.page !== 1 ) {
-            this.props.setPage(this.props.page -1);
+        const {page, setPage} = this.props;
+        if (page !== 1 ) {
+            setPage(page -1);
         }
     }
 
     submitForm = () => {
-        if (this.props.useragrees === 'yes') {
+        const {useragrees,firstName, lastName, email, phone, value, shelterID, userInfo} = this.props;
+        if (useragrees === 'yes') {
             console.log('submitted');
             fetch('https://frontend-assignment-api.goodrequest.com/api/v1/shelters/contribute', {
                 method: 'post',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
-                firstName: this.props.firstName,
-                lastName: this.props.firstName,
-                email: this.props.email,
-                phone: this.props.phone,
-                value: this.props.value,
-                shelterID: this.props.shelterID
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                value: value,
+                shelterID: shelterID
                 })
             })
             .then(response => response.json())
             .then(response => {
-                if (response) {
-                    console.log(response)
+                if (response.messages[0].type === 'SUCCESS') {
+                    console.log();
+                    userInfo('Ďakujeme, formulár bol odoslaný');
+                    this.infoToUser();
             }})
             .catch(error => console.log('cannot receive data', error))
         } else {
@@ -172,23 +174,22 @@ class UserField extends React.Component {
     }
 
     render() {
+        const {page, infomessage} = this.props;
         return(
             <Wrapper>
-                <TextWrapper>
-                {this.props.page === 1
+                {page === 1
                     ? <Page1/>
-                    : this.props.page === 2
+                    : page === 2
                         ? <Page2 />
                         : <Page3 />
                 }
-                </TextWrapper>
-                <InfoBox hidden={this.state.hidden}>{this.props.infomessage}</InfoBox>
+                <InfoBox hidden={this.state.hidden}>{infomessage}</InfoBox>
                 <ButtonsWrapper>
                     <buttonDiv>
-                       {this.props.page !== 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
+                       {page !== 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
                     </buttonDiv>
                     <buttonDiv>
-                        {this.props.page === 3
+                        {page === 3
                             ? <Button value='next' onClick={this.submitForm} large>ODOSLAŤ</Button>
                             : <Button value='next' onClick={this.nextPage}>Pokračovať</Button>}
                     </buttonDiv>

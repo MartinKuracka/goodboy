@@ -25,6 +25,7 @@ const Wrapper = styled.div `
     display: inline-flex;
     justify-content: flex-start;
 `
+
 const Amount = styled.input `
     font-family: 'Hind', sans-serif;
     font-size: 22px;
@@ -43,8 +44,8 @@ const Amount = styled.input `
     &::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
-}
-`
+}`
+
 class SelectAmount extends React.Component {
 
     handleChange = (e) => {

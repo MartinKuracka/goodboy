@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const Wrapper = styled.div `
     display: ${props => props.second ? 'inline-flex' : null};
-    ${'' /* margin-top: ${props => props.second ? '30px' : null}; */}
     align-items: baseline;
     position: relative;
     width: 100%;
@@ -54,7 +53,6 @@ const FieldWrap = styled.div `
 class Page3 extends React.Component {
 
     userThick = (e) => {
-        console.log(e.target.checked)
         e.target.checked === true ? this.props.userAgreeAction('yes') : this.props.userAgreeAction('no');
     }
 
@@ -64,14 +62,13 @@ class Page3 extends React.Component {
         return(
             <Wrapper>
                 <Label>Akou formou chcem prispieť
-                {contributiontype === 'single' ? <Text>Chcem finančne prispieť konkrétnemu útulku</Text> : <Text>Chcem finančne prispieť celej nadácii</Text>}
+                    {contributiontype === 'single' ? <Text>Chcem finančne prispieť konkrétnemu útulku</Text> : <Text>Chcem finančne prispieť celej nadácii</Text>}
                 </Label>
                 <FieldWrap>
                     <Label>Najviac mi záleží na útulku
                          {shelterID !== '' ? <Text>{listOfShelters[Number(shelterID)-1].name}</Text> : <Text>Nebol zvolený</Text> }
                     </Label>
                 </FieldWrap>
-                
                 <FieldWrap>
                     <Label>Suma ktorou chem pomôcť
                          <Text>{value}€</Text>

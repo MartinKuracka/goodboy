@@ -5,9 +5,9 @@ import SheltersList from './shelterslist';
 
 const mapStateToProps = (state) => {
     return {
-        isPending: state.isPending,
-        shelters: state.shelters,
-        error: state.error,
+        isPending: state.selectShelter.isPending,
+        shelters: state.selectShelter.shelters,
+        error: state.selectShelter.error,
         contributiontype: state.contributionType.contributiontype
     }
 }
@@ -22,6 +22,7 @@ const TopText = styled.div `
     display: flex;
     justify-content: space-between;
 `
+
 const H4 = styled.h4 `
     color: var(--subtle);
 `
@@ -37,11 +38,12 @@ const Select = styled.div `
 
 class SelectType extends React.Component {
     render() {
+        const {contributiontype} = this.props;
         return(
             <Wrapper>
                 <TopText>
                     <h3>Najviac mi záleží na útulku</h3>
-                    {this.props.contributiontype === 'single'
+                    {contributiontype === 'single'
                         ? <H4>Povinné</H4>
                         : <H4>Nepovinné</H4>
                     }

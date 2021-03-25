@@ -77,6 +77,7 @@ const phonestyle = {
 class Page2 extends React.Component {
 
     render() {
+        const {updateName, updateSurname, updateEmail, updatePhone} = this.props;
         return(
             <Wrapper>
                 <Text>O vás</Text>
@@ -88,7 +89,7 @@ class Page2 extends React.Component {
                                 minlenght='2'
                                 maxlenght='20'
                                 autoFocus
-                                onChange={this.props.updateName} />
+                                onChange={updateName} />
                         </Label>
                     </InputEl>
                     <InputEl>
@@ -97,36 +98,31 @@ class Page2 extends React.Component {
                                 placeholder='Zadajte Vaše priezvisko'
                                 minlenght='2'
                                 maxlenght='30'
-                                onChange={this.props.updateSurname} />
+                                onChange={updateSurname} />
                         </Label>
                     </InputEl>
                     <InputEl>
                         <Label>E-mailová adresa
-                            <Input type='email' id='name' name='email' 
+                            <Input type='email' id='name' name='email'
                                 placeholder='Zadajte Váš e-mail'
-                                onChange={this.props.updateEmail} />
+                                onChange={updateEmail} />
                         </Label>
                     </InputEl>
                     <InputEl>
                         <Label>Telefónne číslo
-                            <PhoneInput inputStyle={phonestyle} 
-                                onlyCountries={['sk', 'cz']} 
-                                country={'sk'} 
-                                type='phone' 
+                            <PhoneInput inputStyle={phonestyle}
+                                onlyCountries={['sk', 'cz']}
+                                country={'sk'}
+                                type='phone'
                                 id='phone'
-                                onChange={this.props.updatePhone}
+                                onChange={updatePhone}
                             />
                         </Label>
                     </InputEl>
-                    <Wrapper second>
-                        
-                    </Wrapper>
-    
                 </Form>
             </Wrapper>
         )
     }
-    
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Page2);

@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../../img/logo-new 1.png'
 
-const Wrapper = styled.div `    
+const Wrapper = styled.div `
     position: relative;
     display: grid;
     grid-template-columns: 34% 22% 22% 22%;
     width: 100%;
     margin: 100px 0px;
-    background-color: var(---subtle);    
+    background-color: var(---subtle);
 `
 const Line = styled.div `
     grid-column-start: 1 ;
@@ -24,12 +24,12 @@ const ImageLogo = styled.img `
     width: 60%;
 `
 const TextWrapper = styled.div `
-    grid-column-start: ${props => props.first ? '2' : 
+    grid-column-start: ${props => props.first ? '2' :
         props.second ? '3' : '4'};
     display: flex;
     width: 50%;
     text-align: start;
-    flex-direction: column;    
+    flex-direction: column;
 `
 const Link = styled.a `
     text-decoration: none;
@@ -38,9 +38,9 @@ const Link = styled.a `
 `
 const Footer = () => {
     return(
-        
-        <Wrapper>       
-            <Line />     
+
+        <Wrapper>
+            <Line />
             <ImageLogo src={Logo} />
             <TextWrapper first>
                 <h4> Nadácia Good boy</h4>

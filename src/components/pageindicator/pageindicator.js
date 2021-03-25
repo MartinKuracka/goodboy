@@ -23,11 +23,12 @@ const mapStateToProps = (state) => {
 
 class PageIndicator extends React.Component {
     render() {
+        const {page} = this.props;
         return(
             <Wrapper>
-                {this.props.page === 1? <Page current/> : <Page/> }
-                {this.props.page === 2 ? <Page current/> : <Page/> }
-                {this.props.page === 3 ? <Page current/> : <Page/> }
+                {page === 1? <Page current/> : <Page/> }
+                {page === 2 ? <Page current/> : <Page/> }
+                {page === 3 ? <Page current/> : <Page/> }
             </Wrapper>
         )
     }
