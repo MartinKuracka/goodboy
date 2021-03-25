@@ -68,7 +68,7 @@ class Page3 extends React.Component {
                 </Label>
                 <FieldWrap>
                     <Label>Najviac mi záleží na útulku
-                         {shelterID != '' ? <Text>{listOfShelters[Number(shelterID)-1].name}</Text> : <Text>Nebol zvolený</Text> }
+                         {shelterID !== '' ? <Text>{listOfShelters[Number(shelterID)-1].name}</Text> : <Text>Nebol zvolený</Text> }
                     </Label>
                 </FieldWrap>
                 

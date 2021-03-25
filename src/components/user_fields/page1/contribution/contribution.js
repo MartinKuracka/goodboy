@@ -4,55 +4,63 @@ import { connect } from 'react-redux';
 import Icon1 from '../../../../img/icon1.png';
 import Icon2 from '../../../../img/icon2.png';
 import {selectType} from './cont_actions';
+import {infoMessage} from '../../userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
-        contributiontype: state.contributiontype
+        contributiontype: state.contributionType.contributiontype
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         contributionValue: (e) => dispatch(selectType(e))
+        // userInfo: (value) => dispatch(infoMessage(value))
     }
 }
 
 const Container = styled.div `
     width: 100%;
-    height: 180px;
+    height: 190px;
     margin-top: 30px;
     display: flex;
+    border-radius: 24px;
+    box-shadow: var(--shadow)
 `;
 
 const Option1 = styled.div `
     cursor: pointer;
     width:50%;
-    padding: 15px;
-    background-color: ${({ active }) => active ? 'var(--primary)' : 'var(--background)'};
+    padding: 20px;
+    box-sizing: border-box;
+    background: ${({ active }) => active ? 'var(--primary)' : 'var(--background)'};
     border-radius: 24px 0px 0px 24px;
-    border: var(--border_primary);
-    color: ${({ active }) => active ? 'var(--background)' : 'black'};
+    border: ${({ active }) => active ? '0' : 'var(--border_primary)'};
+    color: ${({ active }) => active ? 'var(--background)' : 'var(--border_primary)'};    
 `;
 
 const Option2 = styled.div `
     cursor: pointer;
     width:50%;
-    padding: 15px;
-    background-color: ${({ active }) => active ? "var(--primary)" : "var(--background)"};
+    padding: 20px;
+    box-sizing: border-box;
+    background: ${({ active }) => active ? "var(--primary)" : "var(--background)"};
     overflow: hidden;
     border-radius: 0px 24px  24px 0px;
-    border: var(--border_primary);
-    color: ${({ active }) => active ? 'var(--background)' : 'black'};
+    border: ${({ active }) => active ? '0' : 'var(--border_primary)'};
+    color: ${({ active }) => active ? 'var(--background)' : 'black'};    
 `;
 
 const Image = styled.img `
+    max-width: 80px;
     border-radius: 50%;
-    background-color: var(--subtle)
+    background: var(--subtle)
 `
 
 const Text = styled.p `
-    font-weight:600;
+    font-weight:500;
     font-size: 1.2rem;
+    margin: 0px 0px 10px 0px;
 `
 
 class Contribution extends React.Component {
@@ -86,11 +94,11 @@ class Contribution extends React.Component {
             return (
                 <Container>
                 <Option1 id='1' onClick={this.option1} active={this.state.activeOption1}>
-                    <Image src={Icon1}/>
+                    {this.props.contributiontype === 'single' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
                     <Text>Chcem finančne prispieť konkrétnemu útulku</Text>
                 </Option1>
                 <Option2 id='2' onClick={this.option2} active={this.state.activeOption2}>
-                    <Image src={Icon2}/>
+                    {this.props.contributiontype === 'whole' ? <Image src={Icon1}/> : <Image src={Icon2}/>}
                     <Text>Chcem finančne prispieť celej nadácii</Text>
                 </Option2>
             </Container>

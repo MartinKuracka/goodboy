@@ -1,9 +1,8 @@
-import { 
+import {
     USER_NAME,
     USER_SURNAME,
     USER_EMAIL,
     USER_PHONE,
-    USER_AGREES
 } from './page2_constants'
 
 export const userName = (value) => ({

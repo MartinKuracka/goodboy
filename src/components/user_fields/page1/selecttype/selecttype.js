@@ -16,12 +16,16 @@ const Wrapper = styled.div `
     position:relative;
     width: 100%;
     margin-top: 50px;
-`;
+`
 
 const TopText = styled.div `
     display: flex;
     justify-content: space-between;
 `
+const H4 = styled.h4 `
+    color: var(--subtle);
+`
+
 const Select = styled.div `
     width: 100%;
     margin-top: 10px;
@@ -29,7 +33,7 @@ const Select = styled.div `
     border: var(--border);
     border-radius: var(--radius);
     box-sizing: border-box;
-`;
+`
 
 class SelectType extends React.Component {
     render() {
@@ -38,8 +42,8 @@ class SelectType extends React.Component {
                 <TopText>
                     <h3>Najviac mi záleží na útulku</h3>
                     {this.props.contributiontype === 'single'
-                        ? <h4>Povinné</h4>
-                        : <h4>Nepovinné</h4>
+                        ? <H4>Povinné</H4>
+                        : <H4>Nepovinné</H4>
                     }
                 </TopText>
                 <Select>

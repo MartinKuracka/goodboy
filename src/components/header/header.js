@@ -12,8 +12,9 @@ const mapStateToProps = (state) => {
 const Text = styled.h1 `
     margin: 50px 0px;
     font-size: 46px;
-    font-weight: 600;
+    font-weight: 800;
     line-height: 1;
+    letter-spacing: 1px;
 `
 
 class Header extends React.Component{

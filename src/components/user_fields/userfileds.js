@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Page1 from './page1/page1';
 import Page2 from './page2/page2';
 import Page3 from './page3/page3';
 import { connect } from 'react-redux';
-import {pageNumberAction} from './userfields_actions'
+import {pageNumberAction, infoMessage} from './userfields_actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -16,13 +16,15 @@ const mapStateToProps = (state) => {
         lastName: state.userData.lastName,
         email: state.userData.email,
         phone: state.userData.phone,
-        useragrees: state.userAgree.useragrees
+        useragrees: state.userAgree.useragrees,
+        infomessage: state.changeMessage.infomessage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPage: (value) => dispatch(pageNumberAction(value))
+        setPage: (value) => dispatch(pageNumberAction(value)),
+        userInfo: (value) => dispatch(infoMessage(value))
     }
 }
 
@@ -35,7 +37,7 @@ const Wrapper = styled.div `
     height:100%;
 `
 const TextWrapper = styled.div `
-    min-height: 530px;
+    ${'' /* min-height: 530px; */}
 `
 const ButtonsWrapper = styled.div `
     width: 100%;
@@ -43,46 +45,67 @@ const ButtonsWrapper = styled.div `
     justify-content: space-between;
     margin-top:60px;
 `
+const InfoBox = styled.h4 `
+    display: ${({ hidden }) => hidden ? 'none' : 'block'};
+    color: red;
+    height: 1rem
+`
+
 const Button = styled.button `
     padding: 10px 15px;
     width: 8rem;
+    height: 3.3rem;
     font-family: 'Hind', sans-serif;
     font-size: 15px;
-    font-weight: 600;
-    border-radius: 25px;
-    border: 2px solid;
-    background-color: ${props => props.secondary ? 'var(--background)' : 'var(--primary)'};
-    color: ${props => props.secondary ? 'var(--primary)' : 'var(--background)'};
+    font-weight: 500;
+    border-radius: 35px;
+    border: var(--border_primary);
+    background: ${props => props.secondary ? 'var(--background)' : 'var(--primary)'};
+    color: ${props => props.secondary ? 'var(--primary-text)' : 'var(--background)'};
+    box-shadow: var(--shadow);
+    cursor: pointer;
 `
 class UserField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hidden: true
+        }
+    }
 
     validatePage1 = () => {
         const {contributiontype, shelterID, value} = this.props;
         if (contributiontype === 'single' && (shelterID === '' || value === '')) {
-            console.log('vyplnte prosim pozadovane polia');
+            this.props.userInfo('*zvoľte útulok a sumu príspevku');
+            this.infoToUser();
             return (false);
-        } else if (contributiontype === 'whole' && value === '') {
-            console.log('zvolte prosim sumu prispevku');
+        } else if (contributiontype === 'whole' && value === '' || value === 0) {
+            this.props.userInfo('*zvoľte sumu prispevku');
+            this.infoToUser();
             return (false);
         }
         return (true);
     }
 
     validatePage2 = () => {
-        const {firstName,lastName, email, phone, useragrees} = this.props;
-        const mailformat = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        const {firstName,lastName, email, phone} = this.props;
+        const mailformat = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
         const phoneformat = /([+]?\d{1,3}[. \s]?)?(\d{12}?)/g;
-        if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length != 0) {
-            console.log('meno musi mat 2 az 20 znakov');
+        if (!(firstName.length <= 20 && firstName.length >= 2) && firstName.length !== 0) {
+            this.props.userInfo('*meno musí obsahovať 2 až 20 znakov');
+            this.infoToUser();
             return (false);
         } else if (!(lastName.length <= 30 && lastName.length >= 2) || lastName.length === 0) {
-            console.log('priezvisko musi mat 2 az 30 znakov');
+            this.props.userInfo('*priezvisko musí obsahovať 2 až 30 znakov');
+            this.infoToUser();
             return (false);
         } else if (email.length === 0 || !email.match(mailformat)) {
-            console.log('prosim vlozte platny e-mail');
+            this.props.userInfo('*prosím vložte platný e-mail');
+            this.infoToUser();
             return (false);
         } else if (phone.length === 0 || !phone.match(phoneformat)) {
-            console.log('prosim zadajte platne telefonne cislo');
+            this.props.userInfo('*zadajte platné telefónne číslo');
+            this.infoToUser();
             return (false);
         }
         return (true);
@@ -107,7 +130,7 @@ class UserField extends React.Component {
     }
 
     backPage = () => {
-        if (this.props.page != 1 ) {
+        if (this.props.page !== 1 ) {
             this.props.setPage(this.props.page -1);
         }
     }
@@ -132,8 +155,20 @@ class UserField extends React.Component {
                 if (response) {
                     console.log(response)
             }})
-            .catch(error => console.log('cannot send data', error))
+            .catch(error => console.log('cannot receive data', error))
+        } else {
+            this.props.userInfo('*pre odoslanie musíte súhlasiť so spracovaním osobných údajov');
+            this.infoToUser();
         }
+    }
+
+    infoToUser = (value) => {
+        this.setState ({
+            hidden: false
+        })
+        setTimeout(() => this.setState({
+            hidden: true
+        }), 2500)
     }
 
     render() {
@@ -147,9 +182,10 @@ class UserField extends React.Component {
                         : <Page3 />
                 }
                 </TextWrapper>
+                <InfoBox hidden={this.state.hidden}>{this.props.infomessage}</InfoBox>
                 <ButtonsWrapper>
                     <buttonDiv>
-                       {this.props.page != 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
+                       {this.props.page !== 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
                     </buttonDiv>
                     <buttonDiv>
                         {this.props.page === 3

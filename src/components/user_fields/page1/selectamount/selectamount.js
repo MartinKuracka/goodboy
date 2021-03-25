@@ -36,8 +36,14 @@ const Amount = styled.input `
     border: var(--border);
     border-radius: var(--radius);
     text-align: center;
-    background-color: var(--background);
+    background: var(--background);
     outline:none;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+}
 `
 class SelectAmount extends React.Component {
 
@@ -45,10 +51,10 @@ class SelectAmount extends React.Component {
         console.log(e)
         this.props.updateValue(Number(e.target.value));
         for (var i = 0; i < e.target.parentNode.children.length; i++) {
-            e.target.parentNode.children[i].style.backgroundColor = 'var(--background)';
+            e.target.parentNode.children[i].style.background = 'var(--background)';
             e.target.parentNode.children[i].style.color = 'black'
         }
-        e.target.style.backgroundColor = 'var(--primary)';
+        e.target.style.background = 'var(--primary)';
         e.target.style.color = 'var(--on_primary)';
     }
 

@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Hind&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
 body {  
   margin: 0;
-  font-family: 'Hind', sans-serif;
+  font-family: 'Prompt', sans-serif;
+  background-image: url(../src/img/bck_1920.jpg),
 }
 
