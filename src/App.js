@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import {contributionType} from './components/user_fields/page1/contribution/cont_reducer';
 import {selectShelter} from './components/user_fields/page1/selecttype/selecttype_reducers';
-import {selectValue} from './components/user_fields/page1/selectamount/selectamount_reducer';
+import {selectValue, ownValueSelect} from './components/user_fields/page1/selectamount/selectamount_reducer';
 import {pageNumber, changeMessage} from './components/user_fields/userfields_reducers';
 import {userData} from './components/user_fields/page2/page2_reducers';
 import {userAgree} from './components/user_fields/page3/page3_reducers';
@@ -18,7 +18,7 @@ import PageIndicator from './components/pageindicator/pageindicator';
 import Footer from './components/Footer/footer';
 
 const logger = createLogger();
-const rootReducer = combineReducers({contributionType, selectShelter, selectValue, pageNumber, userData, userAgree, changeMessage});
+const rootReducer = combineReducers({contributionType, selectShelter, selectValue, pageNumber, userData, userAgree, changeMessage, ownValueSelect});
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 const TextSection = styled.div `

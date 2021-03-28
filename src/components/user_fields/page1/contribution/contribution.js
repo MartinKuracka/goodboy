@@ -64,8 +64,8 @@ class Contribution extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          activeOption1: false,
-          activeOption2: true,
+          activeOption1: this.props.contributiontype === 'single' ? true : false,
+          activeOption2: this.props.contributiontype === 'whole' ? true : false,
         };
       }
 

@@ -185,14 +185,14 @@ class UserField extends React.Component {
                 }
                 <InfoBox hidden={this.state.hidden}>{infomessage}</InfoBox>
                 <ButtonsWrapper>
-                    <buttonDiv>
+                    <div>
                        {page !== 1 ? <Button value='back' onClick={this.backPage} secondary>Späť</Button> : false}
-                    </buttonDiv>
-                    <buttonDiv>
+                    </div>
+                    <div>
                         {page === 3
                             ? <Button value='next' onClick={this.submitForm} large>ODOSLAŤ</Button>
                             : <Button value='next' onClick={this.nextPage}>Pokračovať</Button>}
-                    </buttonDiv>
+                    </div>
                 </ButtonsWrapper>
              </Wrapper>
         )
