@@ -77,7 +77,7 @@ const phonestyle = {
 class Page2 extends React.Component {
 
     render() {
-        const {updateName, updateSurname, updateEmail, updatePhone} = this.props;
+        const {updateName, updateSurname, updateEmail, updatePhone, firstName, lastName, email, phone} = this.props;
         return(
             <Wrapper>
                 <Text>O vás</Text>
@@ -86,18 +86,16 @@ class Page2 extends React.Component {
                         <Label>Meno
                             <Input type='name' id='name' name='name'
                                 placeholder='Vaše meno'
-                                minlenght='2'
-                                maxlenght='20'
+                                value={firstName}
                                 autoFocus
-                                onChange={updateName} />
+                                onChange={updateName} autoComplete='on'/>
                         </Label>
                     </InputEl>
                     <InputEl>
                         <Label>Priezvisko
                             <Input type='text' id='name' name='surname'
                                 placeholder='Zadajte Vaše priezvisko'
-                                minlenght='2'
-                                maxlenght='30'
+                                value={lastName}
                                 onChange={updateSurname} />
                         </Label>
                     </InputEl>
@@ -105,6 +103,7 @@ class Page2 extends React.Component {
                         <Label>E-mailová adresa
                             <Input type='email' id='name' name='email'
                                 placeholder='Zadajte Váš e-mail'
+                                value={email}
                                 onChange={updateEmail} />
                         </Label>
                     </InputEl>
@@ -115,6 +114,7 @@ class Page2 extends React.Component {
                                 country={'sk'}
                                 type='phone'
                                 id='phone'
+                                value={phone}
                                 onChange={updatePhone}
                             />
                         </Label>

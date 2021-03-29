@@ -66,11 +66,6 @@ class SelectAmount extends React.Component {
         
     }
 
-    selected = {
-        'background': 'var(--primary)',
-        'color': 'var(--on-primary)',
-    }
-
     render() {
         return(
             <div>
