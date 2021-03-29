@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/goodboy/static/css/main.7a5dae41.chunk.css",
-    "main.js": "/goodboy/static/js/main.25f64162.chunk.js",
-    "main.js.map": "/goodboy/static/js/main.25f64162.chunk.js.map",
+    "main.js": "/goodboy/static/js/main.af617158.chunk.js",
+    "main.js.map": "/goodboy/static/js/main.af617158.chunk.js.map",
     "runtime-main.js": "/goodboy/static/js/runtime-main.25b79b57.js",
     "runtime-main.js.map": "/goodboy/static/js/runtime-main.25b79b57.js.map",
     "static/css/2.2bbe33c5.chunk.css": "/goodboy/static/css/2.2bbe33c5.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.2bbe33c5.chunk.css",
     "static/js/2.70a89d1b.chunk.js",
     "static/css/main.7a5dae41.chunk.css",
-    "static/js/main.25f64162.chunk.js"
+    "static/js/main.af617158.chunk.js"
   ]
 }
